@@ -1,37 +1,49 @@
 # ExpenseFlow
 
-A polished, dark-mode personal expense tracker built with React + Vite. It is fully client-side and stores data in the browser's `localStorage`, so previous months remain available on the same device/browser.
+**A browser-based expense tracker with monthly history and a configurable ledger.**
+
+ExpenseFlow is my secondary portfolio project, focused on a compact React interface for recording expenses and reviewing spending. It runs entirely in the browser with localStorage persistence and starts with an empty ledger.
+
+[Live app](https://expenseflow-livid.vercel.app) · [Usage and data](docs/USAGE.md) · [Architecture and status](docs/STATUS.md) · [Contributing](CONTRIBUTING.md)
 
 ## Features
-- Add, edit and delete expenses
-- Month-by-month navigation
-- Persistent history for previous months
-- 3-month actual spend and automatic 3-month estimate
-- Category breakdown and recent transactions dashboard
-- Searchable expense ledger
-- Settings where expense columns are editable: rename, type, required/optional, add/remove
-- Custom categories and currency symbol
-- Responsive dark money-focused UI
-- No backend, API keys or database required
+
+- Add, edit, delete, and search expenses within a selected month.
+- Browse recorded months and compare the selected month's spending with the previous month.
+- View category totals and recent transactions.
+- Review calendar-quarter actual spending and a simple three-month estimate.
+- Configure categories, a display currency symbol, and ledger columns.
+- Responsive dark interface built with React, Vite, and Lucide icons.
 
 ## Run locally
-```bash
-npm install
+
+```sh
+npm ci
 npm run dev
 ```
-Then open the local Vite URL shown in the terminal.
 
-## Production build
-```bash
+Open the Vite URL printed in the terminal. Use a Node.js version compatible with the locked Vite release.
+
+```sh
 npm run build
 npm run preview
 ```
 
-## Deploy
-This is a static Vite app. Upload the project to GitHub and import the repository into Vercel or Netlify.
+Static hosting build command: `npm run build`. Output: `dist/`. No backend, database service, or API keys are required. Use HTTPS when deployed; record IDs use `crypto.randomUUID()`.
 
-Build command: `npm run build`
-Output directory: `dist`
+## Data and limitations
 
-## Important data note
-Data is stored in browser localStorage. Clearing site data/browser storage will remove the saved expenses. This version intentionally has no server/database, so it is private to the browser/device where it is used.
+Expenses and settings are stored in this browser's localStorage under `expenseflow-v1`, scoped to the site's origin. They are not synchronized across devices or backed up by a server. Clearing site data, changing browsers, or moving to another domain can make records unavailable. Browser storage is not encrypted by the app or protected by a login.
+
+Export/import, cloud sync, bank integration, and authentication are **not implemented**. Currency is a display symbol, not exchange-rate conversion. Keep the built-in date and amount columns usable: calculations still depend on those fields even though settings allow them to be removed or changed. See [known limitations](docs/STATUS.md).
+
+## Project structure
+
+```text
+src/main.jsx     App state, dashboard, ledger, history, expense and settings dialogs
+src/styles.css   Responsive visual styles
+index.html       Vite entry point
+docs/            Usage, calculation details, status and verification checklist
+```
+
+No repository-level license has been selected. No user counts, financial guarantees, or automated test coverage are claimed.
